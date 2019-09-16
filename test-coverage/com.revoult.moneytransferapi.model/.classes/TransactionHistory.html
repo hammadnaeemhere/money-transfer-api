@@ -1,0 +1,158 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TransactionHistory</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.revoult.moneytransferapi.model</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TransactionHistory (com.revoult.moneytransferapi.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TransactionHistory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/ 15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (22/ 22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.revoult.moneytransferapi.model;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
+<i>4</i>&nbsp;import com.revoult.moneytransferapi.constant.TransactionType;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.math.BigDecimal;
+<i>7</i>&nbsp;import java.util.Date;
+<i>8</i>&nbsp;
+<b class="fc"><i>9</i>&nbsp;public class TransactionHistory {</b>
+<i>10</i>&nbsp;    private Integer transactionHistoryId;
+<i>11</i>&nbsp;    private Integer accountId;
+<i>12</i>&nbsp;    private String transactionSummary;
+<i>13</i>&nbsp;    private BigDecimal transactionAmount;
+<i>14</i>&nbsp;    private TransactionType type;
+<i>15</i>&nbsp;    private BigDecimal closingBalance;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = &quot;yyyy-MM-dd hh:mm:ss a&quot;)
+<i>18</i>&nbsp;    private Date transactionDate;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    public Integer getTransactionHistoryId() {
+<b class="fc"><i>21</i>&nbsp;        return transactionHistoryId;</b>
+<i>22</i>&nbsp;    }
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    public void setTransactionHistoryId(Integer transactionHistoryId) {
+<b class="fc"><i>25</i>&nbsp;        this.transactionHistoryId = transactionHistoryId;</b>
+<b class="fc"><i>26</i>&nbsp;    }</b>
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public Integer getAccountId() {
+<b class="fc"><i>29</i>&nbsp;        return accountId;</b>
+<i>30</i>&nbsp;    }
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    public void setAccountId(Integer accountId) {
+<b class="fc"><i>33</i>&nbsp;        this.accountId = accountId;</b>
+<b class="fc"><i>34</i>&nbsp;    }</b>
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    public String getTransactionSummary() {
+<b class="fc"><i>37</i>&nbsp;        return transactionSummary;</b>
+<i>38</i>&nbsp;    }
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    public void setTransactionSummary(String transactionSummary) {
+<b class="fc"><i>41</i>&nbsp;        this.transactionSummary = transactionSummary;</b>
+<b class="fc"><i>42</i>&nbsp;    }</b>
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    public BigDecimal getTransactionAmount() {
+<b class="fc"><i>45</i>&nbsp;        return transactionAmount;</b>
+<i>46</i>&nbsp;    }
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    public void setTransactionAmount(BigDecimal transactionAmount) {
+<b class="fc"><i>49</i>&nbsp;        this.transactionAmount = transactionAmount;</b>
+<b class="fc"><i>50</i>&nbsp;    }</b>
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public TransactionType getType() {
+<b class="fc"><i>53</i>&nbsp;        return type;</b>
+<i>54</i>&nbsp;    }
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    public void setType(TransactionType type) {
+<b class="fc"><i>57</i>&nbsp;        this.type = type;</b>
+<b class="fc"><i>58</i>&nbsp;    }</b>
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    public BigDecimal getClosingBalance() {
+<b class="fc"><i>61</i>&nbsp;        return closingBalance;</b>
+<i>62</i>&nbsp;    }
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    public void setClosingBalance(BigDecimal closingBalance) {
+<b class="fc"><i>65</i>&nbsp;        this.closingBalance = closingBalance;</b>
+<b class="fc"><i>66</i>&nbsp;    }</b>
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    public Date getTransactionDate() {
+<b class="fc"><i>69</i>&nbsp;        return transactionDate;</b>
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    public void setTransactionDate(Date transactionDate) {
+<b class="fc"><i>73</i>&nbsp;        this.transactionDate = transactionDate;</b>
+<b class="fc"><i>74</i>&nbsp;    }</b>
+<i>75</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-09-16 13:08</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,3 @@
+INSERT INTO ACCOUNT (ACCOUNT_TITLE, BALANCE)
+VALUES ('Aliko', '10.00'),
+       ('Test', 1000.22);

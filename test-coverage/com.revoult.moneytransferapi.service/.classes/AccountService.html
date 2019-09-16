@@ -1,0 +1,73 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AccountService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.revoult.moneytransferapi.service</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AccountService (com.revoult.moneytransferapi.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">AccountService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.revoult.moneytransferapi.service;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.revoult.moneytransferapi.dto.Amount;
+<i>4</i>&nbsp;import com.revoult.moneytransferapi.dto.Response;
+<i>5</i>&nbsp;import com.revoult.moneytransferapi.model.Account;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;public interface AccountService {
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;    Response findAllAccounts();
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    Response findAccountByAccountId(Integer accountId);
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    Response depositAccount(Integer accountId, Amount amount);
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    Response withdrawFromAccount(Integer accountId, Amount amount);
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    Response transferBetweenAccounts(Integer fromAccountId, Integer toAccountId, Amount amount);
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    Response transactionHistory(Integer accountId);
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    Response transferHistory(Integer accountId);
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    Response balanceInquiry(Integer accountId);
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    Response createAccount(Account account);
+<i>26</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-09-16 13:08</div>
+</div>
+</body>
+</html>

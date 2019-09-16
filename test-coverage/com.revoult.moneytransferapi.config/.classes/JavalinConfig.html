@@ -1,0 +1,133 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: JavalinConfig</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.revoult.moneytransferapi.config</a> ]
+</div>
+
+<h1>Coverage Summary for Class: JavalinConfig (com.revoult.moneytransferapi.config)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JavalinConfig</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (20/ 22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.revoult.moneytransferapi.config;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.revoult.moneytransferapi.controller.AccountController;
+<i>4</i>&nbsp;import com.revoult.moneytransferapi.utils.PropertyUtils;
+<i>5</i>&nbsp;import io.javalin.Javalin;
+<i>6</i>&nbsp;import org.slf4j.Logger;
+<i>7</i>&nbsp;import org.slf4j.LoggerFactory;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;public class JavalinConfig {
+<i>10</i>&nbsp;    private static Javalin javalin;
+<b class="fc"><i>11</i>&nbsp;    private static final Logger log = LoggerFactory.getLogger(JavalinConfig.class);</b>
+<i>12</i>&nbsp;
+<b class="nc"><i>13</i>&nbsp;    private JavalinConfig() {</b>
+<b class="nc"><i>14</i>&nbsp;    }</b>
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    /**
+<i>17</i>&nbsp;     * Starts the REST Server
+<i>18</i>&nbsp;     */
+<i>19</i>&nbsp;    public static void start() {
+<b class="fc"><i>20</i>&nbsp;        if (javalin == null) {</b>
+<b class="fc"><i>21</i>&nbsp;            javalin = Javalin.create().start(PropertyUtils.getPropertyAsInteger(&quot;server.port&quot;));</b>
+<b class="fc"><i>22</i>&nbsp;            configureRoutes();</b>
+<i>23</i>&nbsp;        }
+<b class="fc"><i>24</i>&nbsp;    }</b>
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    public static void stop() {
+<b class="fc"><i>27</i>&nbsp;        if (javalin != null) {</b>
+<b class="fc"><i>28</i>&nbsp;            log.info(&quot;Shutting down application&quot;);</b>
+<b class="fc"><i>29</i>&nbsp;            javalin.stop();</b>
+<i>30</i>&nbsp;        }
+<b class="fc"><i>31</i>&nbsp;    }</b>
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    /**
+<i>34</i>&nbsp;     * Configure the routes and controller mapping
+<i>35</i>&nbsp;     */
+<i>36</i>&nbsp;    private static void configureRoutes() {
+<b class="fc"><i>37</i>&nbsp;        log.info(&quot;Configuring Routes&quot;);</b>
+<b class="fc"><i>38</i>&nbsp;        javalin.get(&quot;/accounts&quot;, AccountController.findAll);</b>
+<b class="fc"><i>39</i>&nbsp;        javalin.get(&quot;/accounts/:accountId&quot;, AccountController.findOneByAccountNumber);</b>
+<b class="fc"><i>40</i>&nbsp;        javalin.get(&quot;/accounts/:accountId/balance-inquiry&quot;, AccountController.balanceInquiry);</b>
+<b class="fc"><i>41</i>&nbsp;        javalin.get(&quot;/accounts/:accountId/transaction-history&quot;, AccountController.transactionHistory);</b>
+<b class="fc"><i>42</i>&nbsp;        javalin.get(&quot;/accounts/:accountId/transfer-history&quot;, AccountController.transferHistory);</b>
+<b class="fc"><i>43</i>&nbsp;        javalin.post(&quot;/accounts&quot;, AccountController.createAccount);</b>
+<b class="fc"><i>44</i>&nbsp;        javalin.post(&quot;/accounts/:accountId/deposit&quot;, AccountController.depositAccount);</b>
+<b class="fc"><i>45</i>&nbsp;        javalin.post(&quot;/accounts/:accountId/withdraw&quot;, AccountController.withdrawFromAccount);</b>
+<b class="fc"><i>46</i>&nbsp;        javalin.post(&quot;/accounts/:accountId/transfer/:toAccountId&quot;, AccountController.transferBetweenAccounts);</b>
+<b class="fc"><i>47</i>&nbsp;    }</b>
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-09-16 13:08</div>
+</div>
+</body>
+</html>

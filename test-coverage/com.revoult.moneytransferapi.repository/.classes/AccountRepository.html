@@ -1,0 +1,246 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AccountRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.revoult.moneytransferapi.repository</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AccountRepository (com.revoult.moneytransferapi.repository)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AccountRepository</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (26/ 26)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AccountRepository$MockitoMock$390689847</td>
+  </tr>
+  <tr>
+    <td class="name">AccountRepository$MockitoMock$390689847$auxiliary$7h8aYNWi</td>
+  </tr>
+  <tr>
+    <td class="name">AccountRepository$MockitoMock$390689847$auxiliary$Clg2WaGq</td>
+  </tr>
+  <tr>
+    <td class="name">AccountRepository$MockitoMock$390689847$auxiliary$DsTmFu7h</td>
+  </tr>
+  <tr>
+    <td class="name">AccountRepository$MockitoMock$390689847$auxiliary$iM4yguip</td>
+  </tr>
+  <tr>
+    <td class="name">AccountRepository$MockitoMock$390689847$auxiliary$MYqvHGjn</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (26/ 26)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.revoult.moneytransferapi.repository;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.revoult.moneytransferapi.constant.TransactionSummary;
+<i>4</i>&nbsp;import com.revoult.moneytransferapi.constant.TransactionType;
+<i>5</i>&nbsp;import com.revoult.moneytransferapi.model.Account;
+<i>6</i>&nbsp;import com.revoult.moneytransferapi.utils.StringUtils;
+<i>7</i>&nbsp;import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
+<i>8</i>&nbsp;import org.jdbi.v3.sqlobject.customizer.Bind;
+<i>9</i>&nbsp;import org.jdbi.v3.sqlobject.customizer.BindBean;
+<i>10</i>&nbsp;import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
+<i>11</i>&nbsp;import org.jdbi.v3.sqlobject.statement.SqlQuery;
+<i>12</i>&nbsp;import org.jdbi.v3.sqlobject.statement.SqlUpdate;
+<i>13</i>&nbsp;import org.jdbi.v3.sqlobject.transaction.Transaction;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;import java.math.BigDecimal;
+<i>16</i>&nbsp;import java.util.List;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;public interface AccountRepository {
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    @SqlUpdate(&quot;insert into account (ACCOUNT_TITLE, BALANCE) values (:account.accountTitle, :account.balance)&quot;)
+<i>21</i>&nbsp;    @GetGeneratedKeys(&quot;account_id&quot;)
+<i>22</i>&nbsp;    Integer insert(@BindBean(&quot;account&quot;) Account account);
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    @SqlQuery(&quot;select * from account where account_id = ?&quot;)
+<i>25</i>&nbsp;    @RegisterBeanMapper(Account.class)
+<i>26</i>&nbsp;    Account findOne(Integer accountId);
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    @SqlQuery(&quot;select balance from account where account_id = ?&quot;)
+<i>29</i>&nbsp;    BigDecimal findAccountBalance(Integer accountId);
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    @SqlQuery(&quot;select * from account&quot;)
+<i>32</i>&nbsp;    @RegisterBeanMapper(Account.class)
+<i>33</i>&nbsp;    List&lt;Account&gt; findAll();
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    @SqlUpdate(&quot;update account set balance=:balance, last_updated=CURRENT_TIMESTAMP where account_id = :accountId&quot;)
+<i>36</i>&nbsp;    @Transaction
+<i>37</i>&nbsp;    void updateBalance(@Bind(&quot;accountId&quot;) Integer accountId, @Bind(&quot;balance&quot;) BigDecimal balance);
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    @SqlUpdate(&quot;insert into transaction_history (account_id, transaction_summary, transaction_amount, type, closing_balance) &quot; +
+<i>40</i>&nbsp;            &quot;values (:accountId, :transactionSummary, :amount, :type, :closingBalance)&quot;)
+<i>41</i>&nbsp;    @GetGeneratedKeys(&quot;transaction_history_id&quot;)
+<i>42</i>&nbsp;    @Transaction
+<i>43</i>&nbsp;    Integer insertTransactionHistory(@Bind(&quot;accountId&quot;) Integer accountId,
+<i>44</i>&nbsp;                                     @Bind(&quot;transactionSummary&quot;) String transactionSummary,
+<i>45</i>&nbsp;                                     @Bind(&quot;amount&quot;) BigDecimal amount,
+<i>46</i>&nbsp;                                     @Bind(&quot;type&quot;) String type,
+<i>47</i>&nbsp;                                     @Bind(&quot;closingBalance&quot;) BigDecimal closingBalance);
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    @SqlUpdate(&quot;insert into transfer_history (from_account_id, to_account_id, amount, transaction_history_id) &quot; +
+<i>50</i>&nbsp;            &quot;values (:fromAccountId, :toAccountId, :amount, :transactionHistoryId)&quot;)
+<i>51</i>&nbsp;    @Transaction
+<i>52</i>&nbsp;    void insertTransferHistory(@Bind(&quot;fromAccountId&quot;) Integer fromAccountId,
+<i>53</i>&nbsp;                               @Bind(&quot;toAccountId&quot;) Integer toAccountId,
+<i>54</i>&nbsp;                               @Bind(&quot;amount&quot;) BigDecimal amount,
+<i>55</i>&nbsp;                               @Bind(&quot;transactionHistoryId&quot;) Integer transactionHistoryId);
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    /**
+<i>59</i>&nbsp;     * This function deposits the amount in an account.
+<i>60</i>&nbsp;     *
+<i>61</i>&nbsp;     * @param account Account for which amount is to be deposit.
+<i>62</i>&nbsp;     * @param amount  Amount to be deposit.
+<i>63</i>&nbsp;     * @param summary Transaction Summary.
+<i>64</i>&nbsp;     * @return Account with updated balance
+<i>65</i>&nbsp;     */
+<i>66</i>&nbsp;    @Transaction
+<i>67</i>&nbsp;    default Account deposit(Account account, BigDecimal amount, String summary) {
+<b class="fc"><i>68</i>&nbsp;        updateBalance(account.getAccountId(), account.getBalance().add(amount));</b>
+<b class="fc"><i>69</i>&nbsp;        Account updated = findOne(account.getAccountId());</b>
+<i>70</i>&nbsp;
+<b class="fc"><i>71</i>&nbsp;        insertTransactionHistory(</b>
+<b class="fc"><i>72</i>&nbsp;                account.getAccountId(),</b>
+<i>73</i>&nbsp;                summary,
+<i>74</i>&nbsp;                amount,
+<b class="fc"><i>75</i>&nbsp;                TransactionType.DEPOSIT.name(),</b>
+<b class="fc"><i>76</i>&nbsp;                updated.getBalance()</b>
+<i>77</i>&nbsp;        );
+<i>78</i>&nbsp;
+<b class="fc"><i>79</i>&nbsp;        return updated;</b>
+<i>80</i>&nbsp;    }
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    /**
+<i>83</i>&nbsp;     * This function withdraws the amount from an account.
+<i>84</i>&nbsp;     *
+<i>85</i>&nbsp;     * @param account Account from which amount is to be withdrawn.
+<i>86</i>&nbsp;     * @param amount  Amount to be withdrawn.
+<i>87</i>&nbsp;     * @param summary Transaction Summary.
+<i>88</i>&nbsp;     * @return Account with updated balance
+<i>89</i>&nbsp;     */
+<i>90</i>&nbsp;    @Transaction
+<i>91</i>&nbsp;    default Account withdraw(Account account, BigDecimal amount, String summary) {
+<b class="fc"><i>92</i>&nbsp;        updateBalance(account.getAccountId(), account.getBalance().subtract(amount));</b>
+<b class="fc"><i>93</i>&nbsp;        Account updated = findOne(account.getAccountId());</b>
+<i>94</i>&nbsp;
+<b class="fc"><i>95</i>&nbsp;        insertTransactionHistory(</b>
+<b class="fc"><i>96</i>&nbsp;                account.getAccountId(),</b>
+<i>97</i>&nbsp;                summary,
+<i>98</i>&nbsp;                amount,
+<b class="fc"><i>99</i>&nbsp;                TransactionType.WITHDRAW.name(),</b>
+<b class="fc"><i>100</i>&nbsp;                updated.getBalance()</b>
+<i>101</i>&nbsp;        );
+<b class="fc"><i>102</i>&nbsp;        return updated;</b>
+<i>103</i>&nbsp;    }
+<i>104</i>&nbsp;
+<i>105</i>&nbsp;    /**
+<i>106</i>&nbsp;     * This function transfers the amount from one account to another making deposit and withdrawal
+<i>107</i>&nbsp;     * for respective accounts.
+<i>108</i>&nbsp;     *
+<i>109</i>&nbsp;     * @param from   From Account
+<i>110</i>&nbsp;     * @param to     To Account
+<i>111</i>&nbsp;     * @param amount Amount to be transferred
+<i>112</i>&nbsp;     * @return From Account with updated balance.
+<i>113</i>&nbsp;     */
+<i>114</i>&nbsp;    @Transaction
+<i>115</i>&nbsp;    default Account transfer(Account from, Account to, BigDecimal amount) {
+<b class="fc"><i>116</i>&nbsp;        updateBalance(from.getAccountId(), from.getBalance().subtract(amount));</b>
+<b class="fc"><i>117</i>&nbsp;        Account updated = findOne(from.getAccountId());</b>
+<i>118</i>&nbsp;
+<b class="fc"><i>119</i>&nbsp;        Integer transactionId = insertTransactionHistory(</b>
+<b class="fc"><i>120</i>&nbsp;                from.getAccountId(),</b>
+<b class="fc"><i>121</i>&nbsp;                StringUtils.formatString(TransactionSummary.WITHDRAW_TRANSFER.getDescription(), amount, to.getAccountId()),</b>
+<i>122</i>&nbsp;                amount,
+<b class="fc"><i>123</i>&nbsp;                TransactionType.WITHDRAW.name(),</b>
+<b class="fc"><i>124</i>&nbsp;                updated.getBalance()</b>
+<i>125</i>&nbsp;        );
+<b class="fc"><i>126</i>&nbsp;        deposit(to, amount, StringUtils.formatString(TransactionSummary.DEPOSIT_TRANSFER.getDescription(), amount, from.getAccountId()));</b>
+<i>127</i>&nbsp;
+<b class="fc"><i>128</i>&nbsp;        insertTransferHistory(</b>
+<b class="fc"><i>129</i>&nbsp;                from.getAccountId(),</b>
+<b class="fc"><i>130</i>&nbsp;                to.getAccountId(),</b>
+<i>131</i>&nbsp;                amount,
+<i>132</i>&nbsp;                transactionId
+<i>133</i>&nbsp;        );
+<i>134</i>&nbsp;
+<b class="fc"><i>135</i>&nbsp;        return updated;</b>
+<i>136</i>&nbsp;    }
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-09-16 13:08</div>
+</div>
+</body>
+</html>
